@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.businesscardapp.ui.theme.BusinessCardAppTheme
+import androidx.compose.runtime.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,12 +84,12 @@ private fun LogoTitleView(name: String, title: String, modifier: Modifier = Modi
 
 @Composable
 fun MyApp(modifier: Modifier = Modifier) {
-   var showGreeting = remember { mutableStateOf(false) }
+   var showGreeting by remember { mutableStateOf(false) }
     Surface(modifier) {
-        if (showGreeting.value) {
+        if (showGreeting) {
             Greeting(name = "Android")
         } else {
-            OnboardingScreen(func = { showGreeting.value = !showGreeting.value })
+            OnboardingScreen(func = { showGreeting = !showGreeting })
         }
     }
 }
